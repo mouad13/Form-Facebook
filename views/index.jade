@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		link(href="node_modules/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
+		link(rel="stylesheet", type="text/css", href="style.css")
+		title accueil
+	body
+		nav.navbar.navbar-default
+			div#koko
+				div.container-fluid
+					div.form-inline.nav.navbar-nav.navbar-left
+						img(src="photo.jpg")
+
+		h1 Bienvenue
+		div.alert.alert-info
+			| #{formulaire.Nom}
+			p #{formulaire.Prénom}
+			p #{formulaire.Email}
+			p #{formulaire.Jour} : #{formulaire.Mois} : #{formulaire.Année}						 	
+
+		
+
+
+
+		script(src="node_modules/jquery/dist/jquery.js")
+		script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")
