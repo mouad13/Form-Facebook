@@ -1,32 +1,51 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+'use strict';
+
+var Hapi = require('hapi');
+// var Path = require('path');
 
 
-var app = express();
+var server = new Hapi.Server();
 
 
-app.set('views', './views');
-app.set('view engine', 'jade');
+server.connection({ 
+    host: 'localhost', 
+    port: 3300 		
+});
 
-app.use(bodyParser.urlencoded({extended: false}));
+server.route({
+    method: 'POST',
+    path:'/signup', 
+    handler: function (request, reply) {
 
-app.use(express.static(__dirname+ '/'));
-
-
-app.post('/signup', function(req, res){
-	
-
-	res.render('index.jade', { formulaire: req.body} );
-	console.log('youpiii');
-
+        return reply('youpiii');
+    }
 });
 
 
+server.register(require('inert'), (err) => {
 
+	if (err) {
+		throw err;
+	}
 
+	server.route({
+		method: 'GET',
+		path:'/{param*}', 
+		handler: {
+			directory: {
+				path: './'
+			}
+		}
+	});
 
-app.listen(3300, function () {
-	console.log('posqkdpok');
+	server.start((err) => {
 
-})
+	    if (err) {
+	        throw err;
+	    }
+	    console.log('Server running at:', server.info.uri);
+	});
+
+});
+
 
